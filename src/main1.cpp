@@ -8,12 +8,12 @@
 #include "imgui/imgui_impl_opengl3.h"
 
 
-//εξαγωνο 
+//hexagon 
 GLfloat R = 1.0f;
 GLfloat G = 0.5f;
 GLfloat B = 0.2f;
 
-//Δεκαγωνο 
+//deψagon
 GLfloat R1 = 0.2f;
 GLfloat G1 = 0.8f;
 GLfloat B1 = 0.5f;
@@ -103,12 +103,12 @@ int main()
 	};
 
 	GLfloat decagonVertices[] = {
-	0.50f,  0.80f, 0.0f,  // Πάνω κέντρο
+	0.50f,  0.80f, 0.0f,  // up center
 	 0.68f,  0.72f, 0.0f,
 	 0.78f,  0.55f, 0.0f,
 	 0.78f,  0.35f, 0.0f,
 	 0.68f,  0.18f, 0.0f,
-	 0.50f,  0.10f, 0.0f,  // Κάτω κέντρο
+	 0.50f,  0.10f, 0.0f,  //bottom center
 	 0.32f,  0.18f, 0.0f,
 	 0.22f,  0.35f, 0.0f,
 	 0.22f,  0.55f, 0.0f,
