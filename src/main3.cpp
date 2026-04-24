@@ -27,10 +27,7 @@ void FrameBufferSizeCallback(GLFWwindow* givenWindow, int givenWidth, int givenH
 }
 
 
-//ΑΜ=59065
-//πρωτος κυβος αποκλιμακωση 1.0
-//δευτερος κυβος αποκλιμακωση 1.6
-//τριτος κυβος αποκλιμακωση 1.5
+
 
 int main()
 {
@@ -179,7 +176,7 @@ int main()
 		//first cube 
 		glm::mat4 model1 = glm::mat4(1.0f);
 		model1 = glm::rotate(model1, rotationAngles[0], glm::vec3(0, 1, 0));
-		model1 = glm::scale(model1, glm::vec3(1.0f)); // ΑΜ 59065 -> 3ο ψηφίο '0' -> 1.0
+		model1 = glm::scale(model1, glm::vec3(1.0f)); 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model1));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -189,7 +186,7 @@ int main()
 		model2 = glm::rotate(model2, rotationAngles[1], glm::vec3(1, 1, 0));
 		model2 = glm::translate(model2, glm::vec3(radius12, 0, 0));
 		model2 = glm::rotate(model2, rotationAngles[3], glm::vec3(0, 0, 1));
-		model2 = glm::scale(model2, glm::vec3(1.6f)); // ΑΜ 59065 -> 4ο ψηφίο '6' -> 1.6
+		model2 = glm::scale(model2, glm::vec3(1.6f)); 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model2));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
