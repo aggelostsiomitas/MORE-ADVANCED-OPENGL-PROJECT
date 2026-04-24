@@ -11,29 +11,29 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Camera_59065_2.h"
+#include "Camera_2.h"
 
 
 
-// Ρυθμίσεις Φωτισμού
+//Lightning variables
 bool pointLightsActive = true;
 bool dirLightsActive = true;
-int attenuationChoice = 1; // Default 32 μονάδες
+int attenuationChoice = 1; 
 float lightMovingRadius = 5.0f;
 
-// Δομή για τα δεδομένα εξασθένησης (από LearnOpenGL)
+//data for attenuation
 struct Attenuation {
 	float constant, linear, quadratic;
 };
 
 Attenuation attenOptions[] = {
-	{1.0f, 0.09f, 0.032f},   // 20 μονάδες
-	{1.0f, 0.07f, 0.017f},   // 32 μονάδες
-	{1.0f, 0.045f, 0.0075f}, // 50 μονάδες
-	{1.0f, 0.027f, 0.0028f}, // 65 μονάδες
-	{1.0f, 0.014f, 0.0007f}  // 100 μονάδες
+	{1.0f, 0.09f, 0.032f},   
+	{1.0f, 0.07f, 0.017f},   
+	{1.0f, 0.045f, 0.0075f},
+	{1.0f, 0.027f, 0.0028f}, 
+	{1.0f, 0.014f, 0.0007f}  
 };
-
+//call Camer.h to handle Camera_2.h movement
 Camera myCamera(glm::vec3(0.0f, 0.0f, 10.0f));
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -50,9 +50,9 @@ void ProcessInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 	}
 
-	// Έλεγχος Shift για ταχύτητα
+	// Cehck for  Shift key for speed
 	bool shiftPressed = (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
-
+	//handle movement
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		myCamera.ProcessKeyboard(FORWARD, deltaTime, shiftPressed);
@@ -116,10 +116,10 @@ int main()
 	ImGui_ImplOpenGL3_Init("#version 330");
 
 	//initialize shaders
-	Shader lightingShader("res/Shaders_59065/VertexShader_21.txt", "res/Shaders_59065/FragmentShader_21.txt");
-	Shader lampShader("res/Shaders_59065/VertexShader_Light_21.txt", "res/Shaders_59065/FragmentShader_Light_21.txt");
+	Shader lightingShader("res/Shaders_2/VertexShader_21.txt", "res/Shaders_2/FragmentShader_21.txt");
+	Shader lampShader("res/Shaders_2/VertexShader_Light_21.txt", "res/Shaders_2/FragmentShader_Light_21.txt");
 
-	//--Vertex Data
+	//Vertex Data
 	GLfloat  vertices[] =
 	{
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -166,7 +166,7 @@ int main()
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 
 	};
-
+	//initialize VBO,VAO
 	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -192,7 +192,7 @@ int main()
 		glm::vec3(0,5,-3)
 	};
 
-
+	//runnning loop
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = glfwGetTime();
@@ -204,7 +204,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-		// --- ImGui Render ---
+		// ImGui Render 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -237,7 +237,7 @@ int main()
 		glm::vec3 movingLightPos(sin(currentFrame) * lightMovingRadius, 2.0f, cos(currentFrame) * lightMovingRadius);
 		
 
-		// Point Lights (ID 0, 1, 2)
+		// Point Lights 
 		glm::vec3 pPositions[] = { 
 			glm::vec3(0.7f, 0.2f, 2.0f), 
 			glm::vec3(2.3f, -3.3f, -4.0f), 
@@ -255,7 +255,7 @@ int main()
 			lightingShader.setVec3(base + "specular", 1.0f, 1.0f, 1.0f);
 		}
 
-		// Moving Light (i=3)
+		// Moving Light 
 		glm::vec3 movPos(sin(currentFrame)* lightMovingRadius, 1.0f, cos(currentFrame)* lightMovingRadius);
 		lightingShader.setVec3("pointLights[3].position", movPos);
 		lightingShader.setFloat("pointLights[3].linear", attenOptions[attenuationChoice].linear);
