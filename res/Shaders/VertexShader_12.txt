@@ -1,0 +1,16 @@
+#version 330 core
+layout (location = 0) in vec3 aPos;
+uniform vec2 offset;
+out vec3 ourColor;
+
+void main()
+{
+    float finalX = aPos.x + offset.x;
+    float finalY = aPos.y + offset.y;
+    gl_Position = vec4(finalX, finalY, aPos.z, 1.0);
+    
+    // Κανονικοποίηση x,y σε r,g (0.0 έως 1.0)
+    float r = (finalX + 1.0) / 2.0;
+    float g = (finalY + 1.0) / 2.0;
+    ourColor = vec3(r, g, 0.0);
+}
